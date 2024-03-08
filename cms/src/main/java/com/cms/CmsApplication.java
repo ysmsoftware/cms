@@ -13,7 +13,7 @@ public class CmsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CmsApplication.class, args);
-		System.out.println("ggg");
+		System.out.println("hello practice");
 		
 	}
 
