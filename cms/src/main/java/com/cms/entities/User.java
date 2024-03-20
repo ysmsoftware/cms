@@ -2,72 +2,51 @@ package com.cms.entities;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-public class User
-{
+@Table(name="tbl_user")
+public class User{
+	
+	public User() {
+		
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
-
-    private String userMobileNumberAsUsername;
-   
 	
+	@OneToOne
+	@JoinColumn(name = "staff_id")
+	private Staff staff;
 
-	public Role getRole() {
-		return role;
-	}
-
-
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	private String userPassword1Readable;
-    private String userPassword1Encrypted;
-    private String userType; // admin, doctor, reception, etc.
-    private String userPassword; // encrypted password
-    private Date userCreated;
-
-    @OneToOne
-    @JoinColumn(name = "staff_id")
-    private Staff staff;
-    
-    @Enumerated(EnumType.STRING)
-    private Role role; // Role enum
-
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+	@Column(name="user_name")
+	private String  name;
 	
-
-	public User(int userId, String userMobileNumber, String userPassword1Readable, String userPassword1Encrypted,
-			String userType, String userPassword, Date userCreated, Staff staff, Role role) {
-		super();
-		this.userId = userId;
-		
-		this.userPassword1Readable = userPassword1Readable;
-		this.userPassword1Encrypted = userPassword1Encrypted;
-		this.userType = userType;
-		this.userPassword = userPassword;
-		this.userCreated = userCreated;
-
-		this.role = role;
-	}
-
-
+	@Column(name="mobile_number")
+	private String  mobile;
+	
+	@Column(name="user_enabled")
+	private boolean enabled;
+	
+	@Column(name="user_password")
+	private String  password;
+	
+	@Column(name="user_password_read")
+	private String  userPasswordRead;
+	
+	@Column(name="user_role")
+	private String  role;
+	
+	@Column(name="type", unique=true)
+	private String  type;
 
 	public int getUserId() {
 		return userId;
@@ -77,67 +56,81 @@ public class User
 		this.userId = userId;
 	}
 
-
-	public String getUserPassword1Readable() {
-		return userPassword1Readable;
-	}
-
-	public void setUserPassword1Readable(String userPassword1Readable) {
-		this.userPassword1Readable = userPassword1Readable;
-	}
-
-	public String getUserPassword1Encrypted() {
-		return userPassword1Encrypted;
-	}
-	
-	 public String getUserMobileNumberAsUsername() {
-			return userMobileNumberAsUsername;
-		}
-
-
-
-		public void setUserMobileNumberAsUsername(String userMobileNumberAsUsername) {
-			this.userMobileNumberAsUsername = userMobileNumberAsUsername;
-		}
-
-	public void setUserPassword1Encrypted(String userPassword1Encrypted) {
-		this.userPassword1Encrypted = userPassword1Encrypted;
-	}
-
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-
-	public String getUserPassword() {
-		return userPassword;
-	}
-	
-	
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
-
 	public Staff getStaff() {
 		return staff;
 	}
 
-
-
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
-	public Date getUserCreated() {
-		return userCreated;
+
+	public String getName() {
+		return name;
 	}
 
-	public void setUserCreated(Date userCreated) {
-		this.userCreated = userCreated;
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUserPasswordRead() {
+		return userPasswordRead;
+	}
+
+	public void setUserPasswordRead(String userPasswordRead) {
+		this.userPasswordRead = userPasswordRead;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", staff=" + staff + ", name=" + name + ", mobile=" + mobile + ", enabled="
+				+ enabled + ", password=" + password + ", userPasswordRead=" + userPasswordRead + ", role=" + role
+				+ ", type=" + type + "]";
+	}
+   
+	
+	
+	
+
 
 	
 	

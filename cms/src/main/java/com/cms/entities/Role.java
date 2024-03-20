@@ -7,5 +7,4 @@ public enum Role {
     DOCTOR,
     RECEPTIONIST;
 
-   
 }

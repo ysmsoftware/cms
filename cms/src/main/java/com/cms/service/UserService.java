@@ -22,8 +22,8 @@ public class UserService
         Optional<Staff> staffOptional = staffService.getStaffById(staffId);
         staffOptional.ifPresent(staff -> {
             User user = new User();
-            user.setUserMobileNumberAsUsername(staff.getStaffMobileNumber());
-            user.setUserPassword(staff.getStaffPassword()); // You may need to encrypt the password
+            user.setMobile(staff.getStaffMobileNumber());
+            user.setPassword(staff.getStaffPassword()); // You may need to encrypt the password
             //user.setRole(staff.getStaffRole());
             userRepository.save(user);
         });
