@@ -32,11 +32,6 @@ public class Doctor
     private String doctorWorkSchedule;
     private String doctorSpeciality;
     private String doctorEmail;
-
- 
-    
-   
-
     private String licenseNumber;
     private Date graduationDate;
     private Date joiningDate;

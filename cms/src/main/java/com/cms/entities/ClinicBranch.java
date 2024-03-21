@@ -5,8 +5,10 @@ package com.cms.entities;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +33,7 @@ public class ClinicBranch {
    
 	//private int clinicID;		//foreign key
 	@ApiModelProperty
-    private String clinicName;
+	private String clinicBranchName;
 	@ApiModelProperty
     private String clinicType;
 	@ApiModelProperty
@@ -44,6 +46,7 @@ public class ClinicBranch {
     private String clinicEmail;
 	@ApiModelProperty
     private String clinicLocationLatitude;
+	
 	@ApiModelProperty
     private String clinicLocationLongitude;
 	@ApiModelProperty
@@ -52,9 +55,30 @@ public class ClinicBranch {
     private Date clinicBranchCreated;
 	@ApiModelProperty
     private boolean clinicBranchIsActive;
-    
-    
-    public ClinicBranch() {
+	
+
+	@ManyToOne
+	@JoinColumn(name = "clinic_id")
+	private Clinic clinic;
+	
+	
+	  public Integer getClinicId() {
+	        // Check if clinic is not null, then return its ID
+	        return (clinic != null) ? clinic.getClinicId() : null;
+		 
+	    }
+	  
+
+	    public Clinic getClinic() {
+		return clinic;
+	}
+
+
+		public void setClinic(Clinic clinic) {
+	        this.clinic = clinic;
+	    }
+   
+	public ClinicBranch() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -69,18 +93,17 @@ public class ClinicBranch {
 		this.clinicBranchId = clinicBranchId;
 	}
 
+	public String getClinicBranchName() {
+		return clinicBranchName;
+	}
 
+
+	public void setClinicBranchName(String clinicBranchName) {
+		this.clinicBranchName = clinicBranchName;
+	}
 	
 
-	public String getClinicName() {
-		return clinicName;
-	}
-
-
-	public void setClinicName(String clinicName) {
-		this.clinicName = clinicName;
-	}
-
+	
 
 	public String getClinicType() {
 		return clinicType;
@@ -181,23 +204,6 @@ public class ClinicBranch {
 		this.clinicBranchIsActive = clinicBranchIsActive;
 	}
     
-    
-        
 	
-
-
-
-
-	
-	
-
-
-	
-
-
-	
-    
-    
-    
 
 }

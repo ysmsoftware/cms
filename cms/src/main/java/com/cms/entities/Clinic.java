@@ -1,6 +1,7 @@
 package com.cms.entities;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -29,9 +31,9 @@ public class Clinic {
 		
 	  	private int clinicId;
 	
-	    private String clinicName;
-	
-	    private String clinicType;
+		private String clinicName;
+		  
+		private String clinicType;
 		
 	    private String clinicLocation;
 	
@@ -42,10 +44,16 @@ public class Clinic {
 	    private Date clinicCreated;
 	
 	    private boolean clinicIsActive;
-		
-	
 	    
-	
+	    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL)
+	 	private List<ClinicBranch> clinicBranch=new ArrayList<>();
+	    
+	    public void addClinicBranch(ClinicBranch clinicBranch1) {
+	    	
+	    	clinicBranch.add(clinicBranch1); 
+	    	clinicBranch1.setClinic(this); //Set the form for the family member }
+	   }
+   
 		public Clinic() {
 			super();
 			// TODO Auto-generated constructor stub
@@ -62,14 +70,24 @@ public class Clinic {
 		}
 
 
-		public String getClinicName() {
-			return clinicName;
-		}
+		  public String getClinicName() {
+				return clinicName;
+			}
 
 
-		public void setClinicName(String clinicName) {
-			this.clinicName = clinicName;
-		}
+			public void setClinicName(String clinicName) {
+				this.clinicName = clinicName;
+			}
+
+
+			public List<ClinicBranch> getClinicBranch() {
+				return clinicBranch;
+			}
+
+
+			public void setClinicBranch(List<ClinicBranch> clinicBranch) {
+				this.clinicBranch = clinicBranch;
+			}
 
 
 		public String getClinicType() {

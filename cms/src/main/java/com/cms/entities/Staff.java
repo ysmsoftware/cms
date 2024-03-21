@@ -2,6 +2,7 @@ package com.cms.entities;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,15 +30,12 @@ public class Staff
     private String staffWorkSchedule;
     private String staffPassword;
     private String staffAccessRights; // read only, full access, limited access
+    
+	/*
+	 * @OneToOne(mappedBy = "staff",cascade = CascadeType.ALL) private User user;
+	 */
 
-   
-    public User getUser() {
-		return user;
-	}
-
-
-
-	public String getStaffPassword() {
+  	public String getStaffPassword() {
 		return staffPassword;
 	}
 
@@ -59,13 +57,10 @@ public class Staff
 
 
 
+		 
+	
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	@OneToOne(mappedBy = "staff")
-    private User user;
+	
     
 
     private Date joiningDate;

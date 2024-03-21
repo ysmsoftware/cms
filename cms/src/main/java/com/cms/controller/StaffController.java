@@ -28,7 +28,7 @@ public class StaffController
 		
 	}
 	
-	 @GetMapping("/{staffId}")
+	 @GetMapping("/staff/{staffId}")
 	    public Staff getStaffById(@PathVariable int staffId) {
 	        return staffService.getStaffById(staffId)
 	                .orElseThrow(() -> new RuntimeException("Staff not found"));

@@ -2,6 +2,7 @@ package com.cms.entities;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,31 +21,33 @@ public class User
 	private int userId;
 
     private String userMobileNumberAsUsername;
-   
-	
-
-	public Role getRole() {
+    public String getRole() {
 		return role;
 	}
 
 
 
-	public void setRole(Role role) {
+
+
+
+	public void setRole(String role) {
 		this.role = role;
 	}
 
+	private String role; // Role enum
 	private String userPassword1Readable;
     private String userPassword1Encrypted;
     private String userType; // admin, doctor, reception, etc.
     private String userPassword; // encrypted password
     private Date userCreated;
 
-    @OneToOne
-    @JoinColumn(name = "staff_id")
-    private Staff staff;
+	/*
+	 * @OneToOne(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "staff_id") private Staff staff;
+	 */
     
-    @Enumerated(EnumType.STRING)
-    private Role role; // Role enum
+   
 
 	public User() {
 		super();
@@ -53,20 +56,7 @@ public class User
 
 	
 
-	public User(int userId, String userMobileNumber, String userPassword1Readable, String userPassword1Encrypted,
-			String userType, String userPassword, Date userCreated, Staff staff, Role role) {
-		super();
-		this.userId = userId;
-		
-		this.userPassword1Readable = userPassword1Readable;
-		this.userPassword1Encrypted = userPassword1Encrypted;
-		this.userType = userType;
-		this.userPassword = userPassword;
-		this.userCreated = userCreated;
-
-		this.role = role;
-	}
-
+	
 
 
 	public int getUserId() {
@@ -122,15 +112,7 @@ public class User
 		this.userPassword = userPassword;
 	}
 
-	public Staff getStaff() {
-		return staff;
-	}
 
-
-
-	public void setStaff(Staff staff) {
-		this.staff = staff;
-	}
 	public Date getUserCreated() {
 		return userCreated;
 	}

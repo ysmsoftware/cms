@@ -24,7 +24,7 @@ public class UserService
             User user = new User();
             user.setUserMobileNumberAsUsername(staff.getStaffMobileNumber());
             user.setUserPassword(staff.getStaffPassword()); // You may need to encrypt the password
-            //user.setRole(staff.getStaffRole());
+            user.setRole(staff.getStaffRole());
             userRepository.save(user);
         });
     }
