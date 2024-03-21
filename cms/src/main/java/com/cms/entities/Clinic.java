@@ -43,9 +43,12 @@ public class Clinic {
 		
 	    private Date clinicCreated;
 	
-	    private boolean clinicIsActive;
+	    private boolean isActive;
 	    
-	    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL)
+	   
+	  
+
+		@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL)
 	 	private List<ClinicBranch> clinicBranch=new ArrayList<>();
 	    
 	    public void addClinicBranch(ClinicBranch clinicBranch1) {
@@ -140,25 +143,12 @@ public class Clinic {
 		}
 
 
-		public boolean isClinicIsActive() {
-			return clinicIsActive;
-		}
+		  public boolean isActive() {
+				return isActive;
+			}
 
+			public void setActive(boolean isActive) {
+				this.isActive = isActive;
+			}
 
-		public void setClinicIsActive(boolean clinicIsActive) {
-			this.clinicIsActive = clinicIsActive;
-		}
-
-
-	
-
-		
-		
-		
-		
-
-		
-
-	
-	    
 }
