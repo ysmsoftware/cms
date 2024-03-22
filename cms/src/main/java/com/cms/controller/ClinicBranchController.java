@@ -1,35 +1,21 @@
 package com.cms.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.cms.entities.Clinic;
-import com.cms.entities.ClinicBranch;
 import com.cms.service.ClinicBranchService;
-import com.cms.service.ClinicService;
+
 
 
 @RestController
 public class ClinicBranchController 
 {
+	
 	@Autowired(required = true)
 	private ClinicBranchService clinicBranchService;
+		
 	
-	@Autowired(required = true)
-	private ClinicService clinicService;
-	
-	/*
-	 * @PostMapping("/clinicBranch/addClinicBranch") public ClinicBranch
-	 * addClinicBranch(@RequestBody ClinicBranch clinicBranch) {
-	 * 
-	 * return clinicBranchService.addClinicBranch(clinicBranch);
-	 * 
-	 * }
-	 */
+   
+	 
 	 
 	/*
 	 * @GetMapping("/clinicBranch/getClinicBranches") public List<ClinicBranch>

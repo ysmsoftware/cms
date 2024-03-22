@@ -33,7 +33,7 @@ public class Staff
     
 	/*
 	 * @OneToOne(mappedBy = "staff",cascade = CascadeType.ALL) private User user;
-	 */
+	 */ 
 
   	public String getStaffPassword() {
 		return staffPassword;
