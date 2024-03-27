@@ -1,7 +1,5 @@
 package com.cms.entities;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,7 +43,7 @@ public class User{
 	@Column(name="user_role")
 	private String  role;
 	
-	@Column(name="type", unique=true)
+	@Column(name="type")
 	private String  type;
 
 	public int getUserId() {
@@ -126,13 +124,6 @@ public class User{
 				+ enabled + ", password=" + password + ", userPasswordRead=" + userPasswordRead + ", role=" + role
 				+ ", type=" + type + "]";
 	}
-   
-	
-	
-	
-
 
 	
-	
-    
 }

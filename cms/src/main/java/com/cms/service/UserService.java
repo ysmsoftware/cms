@@ -3,8 +3,10 @@ package com.cms.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.integration.IntegrationProperties.RSocket.Client;
 import org.springframework.stereotype.Service;
 
+import com.cms.entities.Clinic;
 import com.cms.entities.Staff;
 import com.cms.entities.User;
 import com.cms.repository.UserRepository;
@@ -18,14 +20,5 @@ public class UserService
 	@Autowired
 	private UserRepository userRepository;
 	
-    public void saveUserFromStaff(int staffId) {
-        Optional<Staff> staffOptional = staffService.getStaffById(staffId);
-        staffOptional.ifPresent(staff -> {
-            User user = new User();
-            user.setMobile(staff.getStaffMobileNumber());
-            user.setPassword(staff.getStaffPassword()); // You may need to encrypt the password
-            //user.setRole(staff.getStaffRole());
-            userRepository.save(user);
-        });
-    }
+		
 }

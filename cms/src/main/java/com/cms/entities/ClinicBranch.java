@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,180 +23,162 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 public class ClinicBranch {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ApiModelProperty
-	private int clinicBranchId;
-	
-	
-   
-	//private int clinicID;		//foreign key
-	@ApiModelProperty
-    private String clinicName;
-	@ApiModelProperty
-    private String clinicType;
-	@ApiModelProperty
-    private String clinicBranchLocation;
-	@ApiModelProperty
-    private String clinicContactNumber1;
-	@ApiModelProperty
-  	private String clinicContactNumber2;
-	@ApiModelProperty
-    private String clinicEmail;
-	@ApiModelProperty
-    private String clinicLocationLatitude;
-	@ApiModelProperty
-    private String clinicLocationLongitude;
-	@ApiModelProperty
-    private Date clinicEstablishedDate;
-	@ApiModelProperty
-    private Date clinicBranchCreated;
-	@ApiModelProperty
-    private boolean clinicBranchIsActive;
-    
-    
-    public ClinicBranch() {
+	public ClinicBranch() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(required = false, hidden = true)
+	private int clinicBranchId;
+	
+	@Transient
+    private int tempClinicId;
+	
+	public int getTempClinicId() {
+		return tempClinicId;
+	}
+
+	public void setTempClinicId(int tempClinicId) {
+		this.tempClinicId = tempClinicId;
+	}
+
+
+	private String clinicBranchName;
+
+    private String clinicBranchType;
+
+    private String clinicBranchLocation;
+
+    private String clinicBranchContactNumber1;
+
+  	private String clinicBranchContactNumber2;
+
+    private String clinicBranchEmail;
+
+    private String clinicBranchLocationLatitude;
+	
+    private String clinicBranchLocationLongitude;
+
+    private Date clinicBranchEstablishedDate;
+	
+    @ApiModelProperty(required = false, hidden = true)
+    private Date clinicBranchCreated;
+
+    @ApiModelProperty(required = false, hidden = true)
+    private boolean isActive;
+	
+    @ApiModelProperty(required = false,hidden = true)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "clinic_id")
+	private Clinic clinic;
 
 	public int getClinicBranchId() {
 		return clinicBranchId;
 	}
 
-
 	public void setClinicBranchId(int clinicBranchId) {
 		this.clinicBranchId = clinicBranchId;
 	}
 
-
-	
-
-	public String getClinicName() {
-		return clinicName;
+	public String getClinicBranchName() {
+		return clinicBranchName;
 	}
 
-
-	public void setClinicName(String clinicName) {
-		this.clinicName = clinicName;
+	public void setClinicBranchName(String clinicBranchName) {
+		this.clinicBranchName = clinicBranchName;
 	}
 
-
-	public String getClinicType() {
-		return clinicType;
+	public String getClinicBranchType() {
+		return clinicBranchType;
 	}
 
-
-	public void setClinicType(String clinicType) {
-		this.clinicType = clinicType;
+	public void setClinicBranchType(String clinicBranchType) {
+		this.clinicBranchType = clinicBranchType;
 	}
-
 
 	public String getClinicBranchLocation() {
 		return clinicBranchLocation;
 	}
 
-
 	public void setClinicBranchLocation(String clinicBranchLocation) {
 		this.clinicBranchLocation = clinicBranchLocation;
 	}
 
-
-	public String getClinicContactNumber1() {
-		return clinicContactNumber1;
+	public String getClinicBranchContactNumber1() {
+		return clinicBranchContactNumber1;
 	}
 
-
-	public void setClinicContactNumber1(String clinicContactNumber1) {
-		this.clinicContactNumber1 = clinicContactNumber1;
+	public void setClinicBranchContactNumber1(String clinicBranchContactNumber1) {
+		this.clinicBranchContactNumber1 = clinicBranchContactNumber1;
 	}
 
-
-	public String getClinicContactNumber2() {
-		return clinicContactNumber2;
+	public String getClinicBranchContactNumber2() {
+		return clinicBranchContactNumber2;
 	}
 
-
-	public void setClinicContactNumber2(String clinicContactNumber2) {
-		this.clinicContactNumber2 = clinicContactNumber2;
+	public void setClinicBranchContactNumber2(String clinicBranchContactNumber2) {
+		this.clinicBranchContactNumber2 = clinicBranchContactNumber2;
 	}
 
-
-	public String getClinicEmail() {
-		return clinicEmail;
+	public String getClinicBranchEmail() {
+		return clinicBranchEmail;
 	}
 
-
-	public void setClinicEmail(String clinicEmail) {
-		this.clinicEmail = clinicEmail;
+	public void setClinicBranchEmail(String clinicBranchEmail) {
+		this.clinicBranchEmail = clinicBranchEmail;
 	}
 
-
-	public String getClinicLocationLatitude() {
-		return clinicLocationLatitude;
+	public String getClinicBranchLocationLatitude() {
+		return clinicBranchLocationLatitude;
 	}
 
-
-	public void setClinicLocationLatitude(String clinicLocationLatitude) {
-		this.clinicLocationLatitude = clinicLocationLatitude;
+	public void setClinicBranchLocationLatitude(String clinicBranchLocationLatitude) {
+		this.clinicBranchLocationLatitude = clinicBranchLocationLatitude;
 	}
 
-
-	public String getClinicLocationLongitude() {
-		return clinicLocationLongitude;
+	public String getClinicBranchLocationLongitude() {
+		return clinicBranchLocationLongitude;
 	}
 
-
-	public void setClinicLocationLongitude(String clinicLocationLongitude) {
-		this.clinicLocationLongitude = clinicLocationLongitude;
+	public void setClinicBranchLocationLongitude(String clinicBranchLocationLongitude) {
+		this.clinicBranchLocationLongitude = clinicBranchLocationLongitude;
 	}
 
-
-	public Date getClinicEstablishedDate() {
-		return clinicEstablishedDate;
+	public Date getClinicBranchEstablishedDate() {
+		return clinicBranchEstablishedDate;
 	}
 
-
-	public void setClinicEstablishedDate(Date clinicEstablishedDate) {
-		this.clinicEstablishedDate = clinicEstablishedDate;
+	public void setClinicBranchEstablishedDate(Date clinicBranchEstablishedDate) {
+		this.clinicBranchEstablishedDate = clinicBranchEstablishedDate;
 	}
-
 
 	public Date getClinicBranchCreated() {
 		return clinicBranchCreated;
 	}
 
-
 	public void setClinicBranchCreated(Date clinicBranchCreated) {
 		this.clinicBranchCreated = clinicBranchCreated;
 	}
 
-
-	public boolean isClinicBranchIsActive() {
-		return clinicBranchIsActive;
+	public boolean isActive() {
+		return isActive;
 	}
 
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 
-	public void setClinicBranchIsActive(boolean clinicBranchIsActive) {
-		this.clinicBranchIsActive = clinicBranchIsActive;
+	public Clinic getClinic() {
+		return clinic;
+	}
+
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
 	}
     
-    
-        
-	
-
-
-
-
-	
-	
-
-
-	
-
-
-	
     
     
     
