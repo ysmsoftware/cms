@@ -2,42 +2,63 @@ package com.cms.entities;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class User
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(required = false, hidden = true)
 	private int userId;
+	
     private String userName;
-   	private String role; // Role enum
-	private String userPassword1Readable;
-    private String userPassword1Encrypted;
-    private String userType; // admin, doctor, reception, etc.
-    private String userPassword; // encrypted password
+    
+    private String userPassword;
+    
+   	private String userRole; 
+   	
     private Date userCreated;
-    private String userMobileNumber;
-    private boolean enable;
+    
+    @ApiModelProperty(required = false, hidden = true)
+    private boolean isActive;
+    
+    @JsonManagedReference
+    @OneToOne
+    @JoinColumn(name="staff_id")
+    private Staff staff;
+    
 
-	/*
-	 * @OneToOne(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinColumn(name = "staff_id") private Staff staff;
-	 */
-  
+    /*@JsonBackReference
+    @OneToOne
+    @JoinColumn(name="doctor_id")
+    private Doctor doctor;*/
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public User(int userId, String userName, String userPassword, String userRole, Date userCreated, boolean isActive,
+			Staff staff) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.userRole = userRole;
+		this.userCreated = userCreated;
+		this.isActive = isActive;
+		this.staff = staff;
+		
 	}
 
 	public int getUserId() {
@@ -45,10 +66,8 @@ public class User
 	}
 
 	public void setUserId(int userId) {
-		this.userId = userId; 
+		this.userId = userId;
 	}
-
-
 
 	public String getUserName() {
 		return userName;
@@ -56,38 +75,6 @@ public class User
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public String getUserPassword1Readable() {
-		return userPassword1Readable;
-	}
-
-	public void setUserPassword1Readable(String userPassword1Readable) {
-		this.userPassword1Readable = userPassword1Readable;
-	}
-
-	public String getUserPassword1Encrypted() {
-		return userPassword1Encrypted;
-	}
-
-	public void setUserPassword1Encrypted(String userPassword1Encrypted) {
-		this.userPassword1Encrypted = userPassword1Encrypted;
-	}
-
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
 	}
 
 	public String getUserPassword() {
@@ -98,6 +85,14 @@ public class User
 		this.userPassword = userPassword;
 	}
 
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
 	public Date getUserCreated() {
 		return userCreated;
 	}
@@ -106,21 +101,22 @@ public class User
 		this.userCreated = userCreated;
 	}
 
-	public String getUserMobileNumber() {
-		return userMobileNumber;
+	public boolean isActive() {
+		return isActive;
 	}
 
-	public void setUserMobileNumber(String userMobileNumber) {
-		this.userMobileNumber = userMobileNumber;
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
-	public boolean isEnable() {
-		return enable;
+	public Staff getStaff() {
+		return staff;
 	}
 
-	public void setEnable(boolean enable) {
-		this.enable = enable;
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
+
 
 	
 }

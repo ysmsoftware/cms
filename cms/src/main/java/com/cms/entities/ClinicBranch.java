@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -27,6 +28,7 @@ public class ClinicBranch {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(required = false, hidden = true)
 	private int clinicBranchId;
+
 	   
 	private String clinicBranchName;
 
@@ -51,7 +53,13 @@ public class ClinicBranch {
 
     @ApiModelProperty(required = false, hidden = true)
     private boolean clinicBranchIsActive;
+
+	@Transient
+    private int tempClinicId;
 	
+    @ApiModelProperty(required = false, hidden = true)
+    private boolean isActive;
+
     @ApiModelProperty(required = false,hidden = true)
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "clinic_id")
@@ -64,6 +72,15 @@ public class ClinicBranch {
 	public void setClinicBranchId(int clinicBranchId) {
 		this.clinicBranchId = clinicBranchId;
 	}
+	
+	public int getTempClinicId() {
+		return tempClinicId;
+	}
+
+	public void setTempClinicId(int tempClinicId) {
+		this.tempClinicId = tempClinicId;
+	}
+
 
 	public String getClinicBranchName() {
 		return clinicBranchName;
@@ -145,12 +162,23 @@ public class ClinicBranch {
 		this.clinicBranchCreated = clinicBranchCreated;
 	}
 
+
 	public boolean isClinicBranchIsActive() {
 		return clinicBranchIsActive;
 	}
 
+	public boolean isActive() {
+		return isActive;
+
+	}
+
+
 	public void setClinicBranchIsActive(boolean clinicBranchIsActive) {
 		this.clinicBranchIsActive = clinicBranchIsActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public Clinic getClinic() {
@@ -159,7 +187,10 @@ public class ClinicBranch {
 
 	public void setClinic(Clinic clinic) {
 		this.clinic = clinic;
+
 	}
+
+
 		
 	/*
 	 * public Integer getClinicId() { // Check if clinic is not null, then return
@@ -168,3 +199,11 @@ public class ClinicBranch {
 	  
 	
 }
+
+    
+    
+    
+    
+
+
+

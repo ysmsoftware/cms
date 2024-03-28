@@ -1,31 +1,33 @@
 package com.cms.service;
 
-import java.util.Optional;
-
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.cms.entities.Staff;
 import com.cms.entities.User;
 import com.cms.repository.UserRepository;
 
 @Service
-public class UserService 
-{
-	@Autowired
-	private StaffService staffService; 
+public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
 	
-    public void saveUserFromStaff(int staffId) {
-        Optional<Staff> staffOptional = staffService.getStaffById(staffId);
-        staffOptional.ifPresent(staff -> {
-            User user = new User();
-            user.setUserMobileNumber(staff.getStaffMobileNumber());
-            user.setUserPassword(staff.getStaffPassword()); // You may need to encrypt the password
-            user.setRole(staff.getStaffRole());
-            userRepository.save(user);
-        });
-    }
+	public UserService() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Transactional
+	 public void changeUserActivationStatus(int userId,boolean isActive) {
+		 
+		 userRepository.changeUserActivationStatus(userId, isActive);    
+	 }
+	
+   public User getUserById(int userId) {
+		
+		User user=userRepository.getUserByUserId(userId);
+		return user;
+		
+	}
+	
 }

@@ -165,4 +165,11 @@ public class Clinic {
 		public void setClinicBranch(List<ClinicBranch> clinicBranch) {
 			this.clinicBranch = clinicBranch;
 		}
+
 }
+
+	
+	    
+	    
+
+

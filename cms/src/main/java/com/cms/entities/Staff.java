@@ -3,78 +3,76 @@ package com.cms.entities;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Staff 
 {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(required = false, hidden = true)
 	private int staffId;
-
+ 
     private String staffRole;
-  
-	private String userType;
-    private String staffFirstName;
+    
+  	private String staffFirstName;
+  	
     private String staffLastName;
+    
     private String staffGender;
+    
     private Date staffDateOfBirth;
+    
     private String staffMobileNumber;
+    
     private String staffQualifications;
+    
     private String staffWorkSchedule;
+    
     private String staffPassword;
+    
     private String staffAccessRights; // read only, full access, limited access
     
-	/*
-	 * @OneToOne(mappedBy = "staff",cascade = CascadeType.ALL) private User user;
-	 */ 
-
-  	public String getStaffPassword() {
-		return staffPassword;
-	}
-
-
-
-	public void setStaffPassword(String staffPassword) {
-		this.staffPassword = staffPassword;
-	}
-	
-	  public String getUserType() {
-			return userType;
-		}
-
-
-
-		public void setUserType(String userType) {
-			this.userType = userType;
-		}
-
-
-
-		 
-	
-
-	
+    private Date staffCreated;
     
-
-    private Date joiningDate;
-
-	public Staff() {
+    private String staffSpeciality;
+    
+    private String staffEmail;
+    
+    private String staffLicenseNumber;
+    
+    private Date staffGraduationDate;
+    
+    private Date staffJoiningDate;
+    
+    @ApiModelProperty(required = false, hidden = true)
+    private boolean isActive;
+    
+    @JsonBackReference
+    @OneToOne(mappedBy = "staff",cascade = CascadeType.ALL)
+    @ApiModelProperty(required = false, hidden = true)
+    private User user;
+    
+    public Staff() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
+    
+    
 
 	public Staff(int staffId, String staffRole, String staffFirstName, String staffLastName, String staffGender,
-			Date staffDateOfBirth, String staffContactNumber, String staffQualifications, String staffWorkSchedule,
-			String staffAccessRights, User user, Date joiningDate) {
+			Date staffDateOfBirth, String staffMobileNumber, String staffQualifications, String staffWorkSchedule,
+			String staffPassword, String staffAccessRights, Date staffCreated, String staffSpeciality,
+			String staffEmail, String staffLicenseNumber, Date staffGraduationDate, Date staffJoiningDate,
+			boolean isActive, User user) {
 		super();
 		this.staffId = staffId;
 		this.staffRole = staffRole;
@@ -82,12 +80,19 @@ public class Staff
 		this.staffLastName = staffLastName;
 		this.staffGender = staffGender;
 		this.staffDateOfBirth = staffDateOfBirth;
-
+		this.staffMobileNumber = staffMobileNumber;
 		this.staffQualifications = staffQualifications;
 		this.staffWorkSchedule = staffWorkSchedule;
+		this.staffPassword = staffPassword;
 		this.staffAccessRights = staffAccessRights;
-		
-		this.joiningDate = joiningDate;
+		this.staffCreated = staffCreated;
+		this.staffSpeciality = staffSpeciality;
+		this.staffEmail = staffEmail;
+		this.staffLicenseNumber = staffLicenseNumber;
+		this.staffGraduationDate = staffGraduationDate;
+		this.staffJoiningDate = staffJoiningDate;
+		this.isActive = isActive;
+		this.user = user;
 	}
 
 
@@ -140,19 +145,13 @@ public class Staff
 		this.staffDateOfBirth = staffDateOfBirth;
 	}
 
-	
-
 	public String getStaffMobileNumber() {
 		return staffMobileNumber;
 	}
 
-
-
 	public void setStaffMobileNumber(String staffMobileNumber) {
 		this.staffMobileNumber = staffMobileNumber;
 	}
-
-
 
 	public String getStaffQualifications() {
 		return staffQualifications;
@@ -170,6 +169,14 @@ public class Staff
 		this.staffWorkSchedule = staffWorkSchedule;
 	}
 
+	public String getStaffPassword() {
+		return staffPassword;
+	}
+
+	public void setStaffPassword(String staffPassword) {
+		this.staffPassword = staffPassword;
+	}
+
 	public String getStaffAccessRights() {
 		return staffAccessRights;
 	}
@@ -178,13 +185,85 @@ public class Staff
 		this.staffAccessRights = staffAccessRights;
 	}
 
-	public Date getJoiningDate() {
-		return joiningDate;
+	public Date getStaffCreated() {
+		return staffCreated;
 	}
 
-	public void setJoiningDate(Date joiningDate) {
-		this.joiningDate = joiningDate;
+	public void setStaffCreated(Date staffCreated) {
+		this.staffCreated = staffCreated;
 	}
-    
-    
+
+	public String getStaffSpeciality() {
+		return staffSpeciality;
+	}
+
+	public void setStaffSpeciality(String staffSpeciality) {
+		this.staffSpeciality = staffSpeciality;
+	}
+
+	public String getStaffEmail() {
+		return staffEmail;
+	}
+
+	public void setStaffEmail(String staffEmail) {
+		this.staffEmail = staffEmail;
+	}
+
+	public String getStaffLicenseNumber() {
+		return staffLicenseNumber;
+	}
+
+	public void setStaffLicenseNumber(String staffLicenseNumber) {
+		this.staffLicenseNumber = staffLicenseNumber;
+	}
+
+	public Date getStaffGraduationDate() {
+		return staffGraduationDate;
+	}
+
+	public void setStaffGraduationDate(Date staffGraduationDate) {
+		this.staffGraduationDate = staffGraduationDate;
+	}
+
+	public Date getStaffJoiningDate() {
+		return staffJoiningDate;
+	}
+
+	public void setStaffJoiningDate(Date staffJoiningDate) {
+		this.staffJoiningDate = staffJoiningDate;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Staff [staffId=" + staffId + ", staffRole=" + staffRole + ", staffFirstName=" + staffFirstName
+				+ ", staffLastName=" + staffLastName + ", staffGender=" + staffGender + ", staffDateOfBirth="
+				+ staffDateOfBirth + ", staffMobileNumber=" + staffMobileNumber + ", staffQualifications="
+				+ staffQualifications + ", staffWorkSchedule=" + staffWorkSchedule + ", staffPassword=" + staffPassword
+				+ ", staffAccessRights=" + staffAccessRights + ", staffCreated=" + staffCreated + ", staffSpeciality="
+				+ staffSpeciality + ", staffEmail=" + staffEmail + ", staffLicenseNumber=" + staffLicenseNumber
+				+ ", staffGraduationDate=" + staffGraduationDate + ", staffJoiningDate=" + staffJoiningDate
+				+ ", isActive=" + isActive + ", user=" + user + "]";
+	}
+
+   
 }
+
+

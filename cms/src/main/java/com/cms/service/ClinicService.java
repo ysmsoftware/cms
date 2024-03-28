@@ -3,9 +3,9 @@ package com.cms.service;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cms.entities.Clinic;
 import com.cms.entities.ClinicBranch;
+import com.cms.repository.ClinicBranchRepository;
 import com.cms.repository.ClinicRepository;
 
 @Service
@@ -13,6 +13,9 @@ public class ClinicService
 {
 	@Autowired(required = true)
     private ClinicRepository clinicRepository;
+	
+	@Autowired
+	private ClinicBranchRepository clinicBranchRepository;
 	
 	@Transactional
 	public Clinic addClinic(Clinic clinic){
@@ -28,7 +31,7 @@ public class ClinicService
             clinicBranch.setClinicBranchEstablishedDate(clinic.getClinicEstablishedDate());
 			clinicBranch.setClinicBranchCreated(new java.sql.Date(System.currentTimeMillis()));
 			clinicBranch.setClinicBranchType(clinic.getClinicType());
-			clinicBranch.setClinicBranchIsActive(true);
+			clinicBranch.setActive(true);
 			clinicBranch.setClinic(clinic);
 			
 			clinic.getClinicBranch().add(clinicBranch);
@@ -41,8 +44,8 @@ public class ClinicService
 
 	public Clinic getClinicById(int clinicId) {
 	
-        Clinic clinic = clinicRepository.getClinicByClinicId(clinicId);
-        return  clinic;
+            Clinic clinic = clinicRepository.getClinicByClinicId(clinicId);
+            return  clinic;
                
     }
 	   	 
@@ -51,5 +54,14 @@ public class ClinicService
 		 
 	       clinicRepository.changeClinicActivationStatus(clinicId,isActive);	        
 	 }
+	 
+	 //this method is for adding clinicBranch under specified clinic Id
+	 public ClinicBranch addClinicBranch(int clinicId, ClinicBranch clinicBranch) {
+	        Clinic clinic = clinicRepository.getClinicByClinicId(clinicId);
+	        clinicBranch.setClinic(clinic); // Associate the clinic with the branch
+	        return clinicBranchRepository.save(clinicBranch);
+	    }
+	 
+	 
 	
 }

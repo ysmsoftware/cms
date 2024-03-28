@@ -14,7 +14,6 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer>{
 	@Query("select u from Clinic u where u.clinicId = :clinicId")
 	public Clinic getClinicByClinicId(int clinicId);
 	
-	
 	@Transactional
 	@Modifying
 	@Query(value = "UPDATE Clinic c SET c.isActive = :isActive WHERE c.clinicId = :clinicId")
